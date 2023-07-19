@@ -3,3 +3,4 @@
 
 pnpm test:unit --run
 pnpm lint-staged
+pnpm test:unit
