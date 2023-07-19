@@ -7,4 +7,12 @@ node_modules
 .env.*
 !.env.example
 vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
+vite.config.ts.timestamp-*w
+.vercel
+coverage
+*.nnb
+e2e/test-results
+e2e/artifacts
+*.icloud
+/notebooks
+.vscode
