@@ -6,72 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
-model AuthKey {
-  id String @id @unique
-
-  auth_user       AuthUser @relation(references: [id], fields: [auth_user_id], onDelete: Cascade)
-  auth_user_id    String
-  hashed_password String?
-
-  @@index([auth_user_id])
-  @@map("auth_key")
-}
-
-model AuthSession {
-  id String @id @unique
-
-  auth_user    AuthUser @relation(fields: [auth_user_id], references: [id], onDelete: Cascade)
-  auth_user_id String
-  expires      DateTime
-
-  @@map("auth_session")
-}
-
-model AuthUser {
-  id String @id @unique
-
-  AuthKey     AuthKey[]
-  AuthSession AuthSession[]
-  email       String        @unique
-  User        User?         @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  user_id     Int?          @unique
-
-  @@map("auth_user")
-}
-
-model CSRFToken {
-  token   String @id @unique
-  expires BigInt
-
-  @@map("csrf_token")
-}
-
-model Permissions {
-  id              Int    @id @default(autoincrement())
-  permission_type String
-  resource_id     Int
-  resource_type   String
-  user_id         Int
-  users           User   @relation(fields: [user_id], references: [id])
-
-  @@map("permissions")
-}
-
-model User {
-  id Int @id @default(autoincrement())
-
-  area_code    String?
-  AuthUser     AuthUser?
-  auth_user_id String        @unique
-  city         String?
-  email        String        @unique
-  name         String
-  phone_number String?
-  photo_url    String?
-  state        String?
-  Permissions  Permissions[]
+model users {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  image     String
+  createdAt DateTime @default(now())
 }
