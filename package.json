@@ -39,7 +39,7 @@
         "@fortawesome/free-brands-svg-icons": "^6.4.2",
         "@fortawesome/free-regular-svg-icons": "^6.4.2",
         "@fortawesome/free-solid-svg-icons": "^6.4.2",
-        "@playwright/test": "^1.36.2",
+        "@playwright/test": "^1.39.0",
         "@prisma/client": "^5.1.1",
         "@skeletonlabs/skeleton": "^1.11.0",
         "@sveltejs/adapter-auto": "^2.1.0",
